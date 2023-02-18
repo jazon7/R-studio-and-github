@@ -1,41 +1,112 @@
 ---
 title: "Connect R Studio and GitHub"
-format: html
+format:
   html:
     theme: litera
-    code-fold: TRUE
+    toc: true
+    toc-location: left
+    number-sections: false
+    number-depth: 2
+    code-fold: show
+    code-tools: true
+    code-overflow: wrap
+    code-copy: hover
+    fig-align: center
+    fig-height: 7
+    fig-width: 9
+    highlight-style: arrow
+    embed-resources: true
+    code-link: true
 editor: source
 execute: 
   echo: TRUE
   warning: FALSE
-  
+  eval: false
+bibliography: references.bib
 ---
 
-## Create a Personal Access Token (PAT) on GitHub
+## Initial Setup
 
 ### Prerequisites
 
- - An active GitHub account.
- - The `usethis` package .
- - The `gitcreds` package.
- 
- Load requires packages:
- 
+-   A [GitHub](https://github.com/) account.
+-   The `usethis` package.
+-   The `gitcreds` package.
+
+Load required packages:
+
 ```{r}
 library(pacman)
 p_load(usethis,gitcreds)
 ```
- 
 
-To enable RStudio to talk to GitHub, first generate a PAT, and use the `create_github_token()` function from `usethis`. 
+Enable RStudio to talk to GitHub, by first generating a personal access token[^1] with the `create_github_token()` function from `usethis`:
 
-Name and copy the PAT (keep it safe as it will never appear again!).
+[^1]: Copy the PAT and keep it somewhere safe. It will never appear again.
 
 ```{r}
-# usethis::create_github_token()
-# gitcreds::gitcreds_set()
+usethis::create_github_token() 
+```
 
+Then, add GitHub credential with `gitcreds_set()` from `gitcreds`.
+
+```{r}
+gitcreds::gitcreds_set()
+```
+
+## RStudio First
+
+If you already have a project locally and you want to get it on GitHub, run the the `use_git()` function from `usethis`:
+
+```{r}
 usethis::use_git()
 ```
 
+Then, run the `use_github() function`, to create a GitHub repo and connect it to your current RStudio project.
 
+```{r}
+usethis::use_github()
+```
+
+If there any issues with git user information, make sure the local git repository has a username and email set.
+
+To do this open a terminal and run the following:
+
+`git config user.name "Username"`
+
+`git config user.email "name@email.com"`
+
+Or add the following to the `.git/config` file:
+
+*\[user\]\
+name = Your Name\
+email = youremail\@yourdomain.com*
+
+## GitHub First
+
+Create a new Repository on GitHub.\
+\
+Login to GitHub and click on your account in the top right hand corner.\
+\
+Then click repositories and **New**.\
+![](images/image-1937855644.png)
+
+In R Studio, click on File \> New Project \> Version Control.
+
+![](images/image-1430589102.png)
+
+Then click Git.
+
+![](images/image-1837796887.png)
+
+Add your GitHub URL[^2] under Repository URL: and click Create Project.
+
+[^2]: For example: https://github.com/username/repositoryname
+
+![](images/image-962024962.png)
+
+## Resources
+
+@usethis
+
+@gitcreds
