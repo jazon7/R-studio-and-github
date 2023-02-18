@@ -1,0 +1,41 @@
+---
+title: "Connect R Studio and GitHub"
+format: html
+  html:
+    theme: litera
+    code-fold: TRUE
+editor: source
+execute: 
+  echo: TRUE
+  warning: FALSE
+  
+---
+
+## Create a Personal Access Token (PAT) on GitHub
+
+### Prerequisites
+
+ - An active GitHub account.
+ - The `usethis` package .
+ - The `gitcreds` package.
+ 
+ Load requires packages:
+ 
+```{r}
+library(pacman)
+p_load(usethis,gitcreds)
+```
+ 
+
+To enable RStudio to talk to GitHub, first generate a PAT, and use the `create_github_token()` function from `usethis`. 
+
+Name and copy the PAT (keep it safe as it will never appear again!).
+
+```{r}
+# usethis::create_github_token()
+# gitcreds::gitcreds_set()
+
+usethis::use_git()
+```
+
+
